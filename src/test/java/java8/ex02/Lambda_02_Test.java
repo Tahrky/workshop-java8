@@ -44,6 +44,7 @@ public class Lambda_02_Test {
 
         // TODO transformer la liste de personnes en liste de comptes
         // TODO tous les objets comptes ont un solde à 100 par défaut
+        /*
         PersonToAccountMapper p = new PersonToAccountMapper ()
         {
 			@Override
@@ -53,9 +54,14 @@ public class Lambda_02_Test {
 				a.setBalance(100);
 				a.setOwner(p);
 				return a;
-				
 			}
-        	
+        };
+        */
+        PersonToAccountMapper p = t -> {
+        	Account a = new Account ();
+			a.setBalance(100);
+			a.setOwner(t);
+			return a;
         };
         List<Account> result = map(personList, p);
 
@@ -94,7 +100,6 @@ public class Lambda_02_Test {
 			return a;
         };
         List<Account> resultTemp = map(personList, p);
-        
         
         List<String> result = new ArrayList <> ();
         
