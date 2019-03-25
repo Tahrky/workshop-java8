@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class Lambda_01_Test {
 
     // tag::PersonPredicate[]
-    interface PersonPredicate {
+    public interface PersonPredicate {
         boolean test(Person p);
     }
     // end::PersonPredicate[]
@@ -48,6 +48,7 @@ public class Lambda_01_Test {
         List<Person> personList = Data.buildPersonList(100);
 
         // TODO result ne doit contenir que des personnes adultes (age >= 18)
+        /*
         PersonPredicate p = new PersonPredicate ()
         {
 
@@ -59,6 +60,8 @@ public class Lambda_01_Test {
 			}
         	
         };
+        */
+        PersonPredicate p = t -> t.getAge () >= 18;
         List<Person> result = filter(personList, p);
 
         assertThat(result.size(), is(83));
@@ -73,6 +76,7 @@ public class Lambda_01_Test {
         List<Person> personList = Data.buildPersonList(100);
 
         // TODO result ne doit contenir que des personnes dont le prénom est "first_10"
+        /*
         PersonPredicate p = new PersonPredicate ()
         {
 
@@ -83,7 +87,9 @@ public class Lambda_01_Test {
 			}
         	
         };
-        List<Person> result = filter(personList, p);
+        */
+        PersonPredicate p2 = t -> t.getFirstname().equals("first_10");
+        List<Person> result = filter(personList, p2);
 
         assertThat(result.size(), is(1));
         assertThat(result, everyItem(hasProperty("firstname", is("first_10"))));
@@ -100,6 +106,7 @@ public class Lambda_01_Test {
 
         // TODO result ne doit contenir que les personnes dont l'age est > 49 et dont le hash du mot de passe correspond à la valeur de la variable passwordSha512Hex
         // TODO Pour obtenir le hash d'un mot, utiliser la méthode DigestUtils.sha512Hex(mot)
+        /*
         PersonPredicate p = new PersonPredicate ()
         {
 
@@ -110,7 +117,11 @@ public class Lambda_01_Test {
 			}
         	
         };
-        List<Person> result = filter(personList, p);
+        */
+        PersonPredicate p3 = t -> {
+			return (t.getAge() > 49 && t.getPassword().equals("test"));
+        };
+        List<Person> result = filter(personList, p3);
         System.out.println(result.size ());
 
         assertThat(result.size(), is(6));
