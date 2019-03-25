@@ -47,9 +47,7 @@ public class Method_02_Test {
         @Override
         public String format (List <Person> listPerson)
         {
-        	String retour = "DaoA";
-        	retour += IDao.super.format(listPerson);
-			return retour;
+        	return DaoA.class.getSimpleName()+IDao.super.format(listPerson);
         }
 
     }
