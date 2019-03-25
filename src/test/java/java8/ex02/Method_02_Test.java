@@ -21,7 +21,12 @@ public class Method_02_Test {
         // TODO créer une méthode String format()
         // TODO la méthode retourne une chaîne de la forme [<nb_personnes> persons]
         // TODO exemple de résultat : "[14 persons]", "[30 persons]"
-        public String format (List <Person> listPerson);
+        default String format (List <Person> listPerson)
+        {
+        	int nbPerson = 0;
+			nbPerson = listPerson.size();
+        	return "[" + nbPerson + " persons]";
+        }
     }
     // end::IDao[]
 
@@ -43,15 +48,7 @@ public class Method_02_Test {
         public String format (List <Person> listPerson)
         {
         	String retour = "DaoA";
-        	
-        	int nbPerson = 0;
-			
-			for (Person p : listPerson)
-			{
-				nbPerson++;
-			}
-        	
-        	retour += "[" + nbPerson + " persons]";
+        	retour += IDao.super.format(listPerson);
 			return retour;
         }
 
