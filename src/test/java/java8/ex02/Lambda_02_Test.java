@@ -72,7 +72,7 @@ public class Lambda_02_Test {
         List<Person> personList = Data.buildPersonList(100);
 
         // TODO transformer la liste de personnes en liste de prénoms
-        //*
+        /*
         PersonToAccountMapper p = new PersonToAccountMapper ()
         {
 
@@ -87,6 +87,12 @@ public class Lambda_02_Test {
         	
         };
         //*/
+        PersonToAccountMapper p = t -> {
+        	Account a = new Account ();
+			a.setBalance(100);
+			a.setOwner(t);
+			return a;
+        };
         List<Account> resultTemp = map(personList, p);
         
         
