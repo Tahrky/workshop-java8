@@ -55,7 +55,7 @@ public class Lambda_04_Test {
             FuncCollection<T> result = new FuncCollection<>();
 
             //TODO
-            for (T t : result.list)
+            for (T t : this.list)
             {
             	if (predicate.test(t))
             	{
@@ -68,10 +68,8 @@ public class Lambda_04_Test {
 
         private <E> FuncCollection<E> map(GenericMapper<T, E> mapper) {
             FuncCollection<E> result = new FuncCollection<>();
-            FuncCollection<T> listParcours = new FuncCollection<>();
-            
             // TODO
-            for (T t : listParcours.list)
+            for (T t : this.list)
             {
             	result.add(mapper.map(t));
             }
@@ -80,11 +78,12 @@ public class Lambda_04_Test {
         }
 
         private void forEach(Processor<T> processor) {
-           // TODO
-        	FuncCollection<T> result = new FuncCollection<>();
-    		
-        	for (T t : result.list)
+            // TODO
+        	for (T t : this.list)
+        	{
         		processor.process(t);
+        	}
+        		
         }
         // end::methods[]
 
@@ -109,7 +108,7 @@ public class Lambda_04_Test {
 	        		t -> 
 	        		{
 	                	Account a = new Account ();
-	        			a.setBalance(100);
+	        			a.setBalance(1000);
 	        			a.setOwner(t);
 	        			return a;
 	                }
@@ -146,7 +145,7 @@ public class Lambda_04_Test {
         GenericMapper <Person, Account> mapToAccount = t -> 
 		{
         	Account a = new Account ();
-			a.setBalance(100);
+			a.setBalance(1000);
 			a.setOwner(t);
 			return a;
         };
