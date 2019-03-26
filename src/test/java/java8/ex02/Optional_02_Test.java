@@ -47,10 +47,10 @@ public class Optional_02_Test {
 
         // TODO encapsuler la valeur jules dans un type Optional
         // TODO utiliser la méthode "of"
-        Optional<Person> julesOpt = null;
+        Optional<Person> julesOpt = Optional.of(jules);
 
         // TODO récupérer l'age de jules via la méthode "map"
-        Optional<Integer> julesAge = null;
+        Optional<Integer> julesAge = julesOpt.map(p->p.getAge());
 
         assertThat(julesAge.isPresent(), is(true));
         assertThat(julesAge.get(), is(30));
@@ -63,11 +63,17 @@ public class Optional_02_Test {
 
         // TODO encapsuler la valeur jules dans un type Optional
         // TODO utiliser la méthode "of"
-        Optional<Person> julesOpt = null;
+        Optional<Person> julesOpt = Optional.of(jules);
 
         // TODO appliquer la méthode "filter" à julesOpt avec le prédicat "adult"
         // TODO chaîner avec la méthode "map" pour récupérer l'age
         // TODO utiliser la méthode isPresent pour vérifier que l'age est bien 30, déclencher l'exception GoodException pour valider que la fonction en paramètre de ifPresent a bien été exécutée.
         // julesOpt.filter...;
+        
+        /*
+        Optional<Person> adultPerson = julesOpt.filter(adult);
+        Optional<Integer> julesAge = adultPerson.map(p->p.getAge());
+        julesAge.ifPresent(julesAge.get() == 30);
+        */
     }
 }
