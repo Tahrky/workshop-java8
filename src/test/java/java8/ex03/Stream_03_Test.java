@@ -8,8 +8,11 @@ import java8.data.domain.Pizza;
 import org.junit.Test;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import static java.util.stream.Collectors.*;
 
 import static org.hamcrest.Matchers.*;
@@ -37,7 +40,7 @@ public class Stream_03_Test {
         List<Order> orders = new Data().getOrders();
 
         // TODO construire une Map <Client, Commandes effectuées par le client
-        Map<Customer, List<Order>> result = null;
+        Map<Customer, List<Order>> result = orders.stream().collect(Collectors.groupingBy(o -> o.getCustomer()));
 
         assertThat(result.size(), is(2));
         assertThat(result.get(new Customer(1)), hasSize(4));
@@ -63,7 +66,12 @@ public class Stream_03_Test {
         List<Customer> customers = new Data().getCustomers();
 
         // TODO Construire la map Sexe -> Chaîne représentant les prénoms des clients
-        Map<Gender, String> result = null;
+        // Il faut ranger les clients (Parce que l'on voit dans les asserts que les prénoms sont triés par ordre alphabétique)
+        // Dans le toMap, le 3eme parametre est un binaryOperator toMerge, faisable par une lambda qui prend la valeur précédente et la suivante
+        Map<Gender, String> result = customers
+        								.stream ()
+        								.sorted (Comparator.comparing(Customer::getFirstname))
+        								.collect(Collectors.toMap(Customer::getGender, Customer::getFirstname, (t,p) -> t+"|"+p));
 
         assertThat(result.get(Gender.F), is("Alexandra|Marion|Sophie"));
         assertThat(result.get(Gender.M), is("Cyril|Johnny"));
