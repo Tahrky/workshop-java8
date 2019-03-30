@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import static org.hamcrest.Matchers.*;
@@ -70,10 +71,18 @@ public class Optional_02_Test {
         // TODO utiliser la méthode isPresent pour vérifier que l'age est bien 30, déclencher l'exception GoodException pour valider que la fonction en paramètre de ifPresent a bien été exécutée.
         // julesOpt.filter...;
         
-        /*
-        Optional<Person> adultPerson = julesOpt.filter(adult);
-        Optional<Integer> julesAge = adultPerson.map(p->p.getAge());
-        julesAge.ifPresent(julesAge.get() == 30);
-        */
+        Optional<Integer> julesAge = julesOpt.filter(adult).map(p->p.getAge());
+        // julesAge.isPresent est vrai si elle contient une valeur
+        assertThat (julesAge.isPresent(), is(true));
+        assertThat (julesAge.get(), is(30));
+        
+        // https://stackoverflow.com/questions/24228279/proper-usage-of-optional-ifpresent
+        julesOpt.ifPresent(new Consumer<Person>() {
+            @Override
+            public void accept(Person theUser) {
+                throw new GoodException();
+            }
+        });
+        //*/
     }
 }
