@@ -77,9 +77,11 @@ public class Optional_02_Test {
         assertThat (julesAge.get(), is(30));
         
         // https://stackoverflow.com/questions/24228279/proper-usage-of-optional-ifpresent
-        julesOpt.ifPresent(new Consumer<Person>() {
+        julesOpt.ifPresent(new Consumer<Person>() 
+        {
             @Override
-            public void accept(Person theUser) {
+            public void accept(Person theUser) 
+            {
                 throw new GoodException();
             }
         });
