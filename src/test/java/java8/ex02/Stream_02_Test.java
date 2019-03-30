@@ -46,5 +46,7 @@ public class Stream_02_Test {
         assertThat(result.getMin(), is(1000));
         assertThat(result.getMax(), is(1375));
         assertThat(result.getCount(), is(9L));
+        
+        
     }
 }
